@@ -13,7 +13,8 @@ fluidPage(
     mainPanel(
       plotOutput("cumu"),
       plotOutput("incr"),
-      textOutput("upd")
+      textOutput("upd"),
+      h6(tagList("Data sourced from", tags$a(href = "https://github.com/CSSEGISandData/COVID-19", "John Hopkins CSSE.")))
     )
   )
 )

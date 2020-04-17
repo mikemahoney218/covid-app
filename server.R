@@ -44,7 +44,12 @@ server <- function(input, output, session) {
   })
   
   output$upd <- renderText({
-    paste("Data last updated on", format(max(c(deaths$Date, cases$Date)), "%A, %B %d, %Y"))
+    paste("Data extends until", format(max(c(deaths$Date, cases$Date)), "%A, %B %d, %Y"))
   })
+
+  output$sources <- renderText({
+      'Data sourced from <a href="https://github.com/CSSEGISandData/COVID-19">John Hopkins CSSE</a>.'
+  })
+  
 }
 
