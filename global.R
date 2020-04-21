@@ -25,7 +25,7 @@ state_options <- unique(deaths$Province_State)
 
 update_data <- function(category, state, a2) {
   
-  if (category == "death") dat <- deaths
+  if (category == "deaths") dat <- deaths
   if (category == "cases") dat <- cases
   
   if (is.null(state) || state == "NA") {

@@ -9,6 +9,7 @@ server <- function(input, output, session) {
     updateSelectizeInput(session, "Admin2",
                       choices = c("All Counties" = NA, county_filtering)
     )
+    
   })
 
   data_filter <- reactive({
@@ -23,10 +24,19 @@ server <- function(input, output, session) {
       scale_func <- scale_y_log10
     }
     
+    if (input$State == "NA") {
+      title_string <- paste0(input$type, " - United States")
+    } else if (input$Admin2 == "NA") {
+      title_string <- paste0(input$type, " - ", input$State)
+      
+    } else {
+      title_string <- paste0(input$type, " - ", input$State, ": ", input$Admin2)
+    }
+    
     data_filter() %>% 
       ggplot(aes(Date, cumulative)) %>% 
       make_graph(scale_func, c(input$range[[1]], input$range[[2]])) + 
-      ggtitle("Cumulative numbers")
+      ggtitle(paste0("Cumulative ", title_string))
     
     })
   
@@ -37,10 +47,19 @@ server <- function(input, output, session) {
       scale_func <- scale_y_log10
     }
     
+    if (input$State == "NA") {
+      title_string <- paste0(input$type, " - United States")
+    } else if (input$Admin2 == "NA") {
+      title_string <- paste0(input$type, " - ", input$State)
+      
+    } else {
+      title_string <- paste0(input$type, " - ", input$State, ": ", input$Admin2)
+    }
+    
     data_filter() %>% 
       ggplot(aes(Date, daily)) %>% 
       make_graph(scale_func, c(input$range[[1]], input$range[[2]])) +
-      ggtitle("Daily increases")
+      ggtitle(paste0("Daily ", title_string))
   })
   
   output$upd <- renderText({
