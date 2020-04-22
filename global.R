@@ -42,7 +42,11 @@ update_data <- function(category, state, a2) {
   dat %>% 
     group_by(Date) %>% 
     summarise(cumulative = sum(cumulative),
-              daily = sum(daily))
+              daily = sum(daily)) %>% 
+    ungroup() %>% 
+    arrange(Date) %>% 
+    mutate(avg = zoo::rollmean(daily, 7, NA, align = "right"),
+           avg = ifelse(avg < 1, NA, avg))
 }
 
 make_graph <- function(grob, scale_func, date_range) {

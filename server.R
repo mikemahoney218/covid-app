@@ -35,7 +35,7 @@ server <- function(input, output, session) {
     
     data_filter() %>% 
       ggplot(aes(Date, cumulative)) %>% 
-      make_graph(scale_func, c(input$range[[1]], input$range[[2]])) + 
+      make_graph(scale_func, c(input$range[[1]], input$range[[2]] + days(1))) + 
       ggtitle(paste0("Cumulative ", title_string))
     
     })
@@ -58,7 +58,8 @@ server <- function(input, output, session) {
     
     data_filter() %>% 
       ggplot(aes(Date, daily)) %>% 
-      make_graph(scale_func, c(input$range[[1]], input$range[[2]])) +
+      make_graph(scale_func, c(input$range[[1]], input$range[[2]] + days(1))) +
+      geom_line(aes(y = avg), size = 1.3, color = "blue") +
       ggtitle(paste0("Daily ", title_string))
   })
   
