@@ -85,14 +85,14 @@ server <- function(input, output, session) {
   ###############
   output$gb_cumu <- renderPlot({
     
-    if (input$scale == "lin") {
+    if (input$gb_scale == "lin") {
       scale_func <- scale_y_continuous
     } else {
       scale_func <- scale_y_log10
     }
     
     if (input$gb_country == "NA") {
-      title_string <- paste0(input$type, " - Worldwide")
+      title_string <- paste0(input$gb_type, " - Worldwide")
     } else if (input$gb_region == "NA") {
       title_string <- paste0(input$gb_type, " - ", input$gb_country)
       
@@ -108,14 +108,14 @@ server <- function(input, output, session) {
   })
   
   output$gb_incr <- renderPlot({
-    if (input$scale == "lin") {
+    if (input$gb_scale == "lin") {
       scale_func <- scale_y_continuous
     } else {
       scale_func <- scale_y_log10
     }
     
     if (input$gb_country == "NA") {
-      title_string <- paste0(input$type, " - Worldwide")
+      title_string <- paste0(input$gb_type, " - Worldwide")
     } else if (input$gb_region == "NA") {
       title_string <- paste0(input$gb_type, " - ", input$gb_country)
       
